@@ -1,12 +1,16 @@
 Тип данных - int? str? list? dict
 
 from fastapi import FastAPI, HTTPExpection               
-from typing import Optional 
+from typing import Optional, List 
 from pydentic import BaseModel                                                             то шо мы буим из библиотеки pydentic импортировать класс BaseModel
 
 app = FastAPI() 
 
-app = FastAPI() 
+
+class Post(BaseModel):                                                                     создаём нновый класс и указываем, что он наследует всё из класса BaseModel
+         id: int                                                                           общая структура будет состоять из ключей для каждого поста(ниже)
+         title: str
+         body: str
 
 posts = [                     
      {'id': 1, 'title': 'News one', 'body': "Text 1"},
@@ -15,13 +19,16 @@ posts = [
 ]
 
 @app.get("/items")
-async def items() -> list[dict]:                                                            допустим данная функция будет возвращать конкретно ту структуру с ключами выше
-        eturn posts
-
+async def items() -> list[Post]:                                                            допустим данная функция будет возвращать конкретно ту структуру с ключами выше, и она возвращает не просто список с элементами, а именно на основе класса Post, также можно из типа данных передать это в класс Listn posts
+           post_objects = []
+           for post in posts:
+           post_objects.append(Post(id=post['id'], title=post[title], body=post[body]))    обращаемся к post_objects, append тоисть мы постоянно будем что-то добавлять в этот список, обращаюсь к классу и создаю объект на его основе, в качестве знач-я мы обращаемся к id, в поле знач-я будем подставлять post, тоисть беру каждый пост и из него вытягиваю ключи 
+           return posts
+ 
 
 @app.get("/items/{id}")              
 async def items(id: int) -> dict:                 
-        for post in posts            
+        for post in posts:            
             if post['id'] == id:
               return post
 
