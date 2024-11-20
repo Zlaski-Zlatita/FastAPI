@@ -1,5 +1,8 @@
 Тип данных - int? str? list? dict
 
+app = FastAPI() 
+
+app = FastAPI() 
 
 posts = [                     
      {'id': 1, 'title': 'News one', 'body': "Text 1"},
