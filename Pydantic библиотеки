@@ -1,5 +1,9 @@
 Тип данных - int? str? list? dict
 
+from fastapi import FastAPI, HTTPExpection               
+from typing import Optional 
+from pydentic import BaseModel                                                             то шо мы буим из библиотеки pydentic импортировать класс BaseModel
+
 app = FastAPI() 
 
 app = FastAPI() 
