@@ -20,3 +20,17 @@ posts = [
      {'id': 2, 'title': 'News one', 'body': "Text 1"},
      {'id': 3, 'title': 'News one', 'body': "Text 1"},
 ]
+
+@app.get("/items") я хочу при переходе на страницу items возвращать страницу со всеми этими ключами
+async def items() -> list[dict]: 
+        eturn posts
+
+ПОЗДРАВЛЯЮ! МЫ СОЗДАЛИ URL АДРЕС
+
+теперь мы хотим создать только 1 функцию, тоисть укажем динамический парамеьтр(ссылку)
+
+@app.get("/items/{id}")                в фигурных скобках указываем динамический параметр
+async def items(id: int) -> list[dict]: 
+        for post in posts              создадим цикл, переменная - post 
+        if post['id']
+        return posts
