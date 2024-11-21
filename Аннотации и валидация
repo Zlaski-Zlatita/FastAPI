@@ -1,1 +1,87 @@
 с помощью данных аннотаций можно сразу при получении данных получатиь проверки, если данные не пройдут проверку, то будет ваыдана ошибка
+
+from fastapi import FastAPI, HTTPExpection, Path      Path - класс - точка входа для всех функций, функцию Path iterdir() для перебора файлов в каталоге.        
+from typing import Optional, List, Dict 
+from pydentic import BaseModel           
+
+app = FastAPI() 
+
+
+class User(BaseModel):                      
+             id: int                     
+             name: str
+             age: int
+
+class Post(BaseModel):                                                                    
+         id: int                                                                         
+         title: str
+         body: str
+         author: User
+
+class PostCrete(BaseModel):
+      title: str
+      body: str
+      author_id: int
+users = [
+            {id: 1, ; 'name': 'John', 'age': 34},           
+            {id: 2, ; 'name': 'John', 'age': 3},
+            {id: 3, ; 'name': 'John', 'age': 4},
+]
+
+posts = [                     
+     {'id': 1, 'title': 'News one', 'body': "Text 1", 'author': users[1]},
+     {'id': 2, 'title': 'News one', 'body': "Text 1", 'author': users[2]},
+     {'id': 3, 'title': 'News one', 'body': "Text 1", 'author': users[3]},
+]
+
+@app.get("/items")
+async def items() -> list[Post]:                                                       
+           post_objects = []
+           for post in posts:
+           post_objects.append(Post(id=post['id'], title=post[title], body=post[body]))    
+           return post_objects
+
+                                                         
+@app.get("/items")
+async def items() -> list[Post]:
+           return [Post(**post) for post in posts]
+ 
+
+@app.get("/items/{id}")              
+async def items(id: int) -> Post:                       
+        for post in posts:            
+            if post['id'] == id:
+              return Post(**post)                               
+
+        raise HTTPExpection(status_code=404, detail='Post doesn't exist')          
+        return posts
+
+
+@app.get("/search")                    get - это прямой заход на url адрес
+async def search(post_id: Optional[int] = None) -> Dict{str, Optional{Post}}:     
+      if post_id:                                             
+           for post in posts              
+               if post['id'] == post_id:
+                          return {"data": Post(**post)}
+                    raise HTTPExpection(status_code=404, detail='Post doesn't exist')   
+      else:                                                    
+            return {"data": None}   
+
+@app.post("/items")                                
+async def add_item(post: PostCreate) -> Post:     
+     author = next((user for user in users if user['id'] ** post.author_id), None)    
+     if not author:                                 если автор не найден
+          raise HTTPExpection(status_code=404, detail='User doesn't exist')
+
+new_post.id = len(new_post) + 1               
+
+new_post = ({id: new_post.id, 'title': post.title, 'body': post.body, 'author': author})   
+post.append(new_post)
+
+return Post(**new_post)
+
+ @app.put("/items/edit/{id}")                         
+async def add_item(post: PostCreate) -> Post:     
+     author = next((user for user in users if user['id'] ** post.author_id), None)        
+     if not author:                               
+          raise HTTPExpection(status_code=404, detail='User doesn't exist')        
