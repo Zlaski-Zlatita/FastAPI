@@ -71,12 +71,14 @@ async def add_item(post: PostCreate) -> Post:       здесь только 1 п
      if not author:                                 если автор не найден
           raise HTTPExpection(status_code=404, detail='User doesn't exist')
 
-new_post.id = len(posts) + 1                    если же польз-ль будет найден, то мы создадим новый post, для этог7о укажем несколько ключей, я сейчас подсчитаю сколько у нас есть постов и к этому добавлю 1, тоисть у нас есть блок posts? 'nj e yfc b ,eltn yjdsq шв
+new_post.id = len(new_post) + 1                    если же польз-ль будет найден, то мы создадим новый post, для этог7о укажем несколько ключей, я сейчас подсчитаю сколько у нас есть постов и к этому добавлю 1, тоисть у нас есть блок posts? 'nj e yfc b ,eltn yjdsq шв
 
-posts.append({id: new_post.id, 'title': post.title, 'body': post.bodyЮ 'author': author})      обратимся ко всем нашим постам, указываю, что буду добавлять новый объект, суть объекта,  - append - встроенный метод для добавления эл-та в конец списка, указываем то, что мы получаем из post  - title --- тоисть мы находим автора, id, создаём запись: новый id, tile и body
+new_post = ({id: new_post.id, 'title': post.title, 'body': post.body, 'author': author})      обратимся ко всем нашим постам, указываю, что буду добавлять новый объект, суть объекта,  - append - встроенный метод для добавления эл-та в конец списка, указываем то, что мы получаем из post  - title --- тоисть мы находим автора, id, создаём запись: новый id, tile и body
+post.append(new_post)
 
+return Post(**new_post)
 
-
+put - служит для редактирования 
 
 
 
