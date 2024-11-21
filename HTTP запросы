@@ -1,1 +1,86 @@
+from fastapi import FastAPI, HTTPExpection               
+from typing import Optional, List, Dict 
+from pydentic import BaseModel           
+
+app = FastAPI() 
+
+
+class User(BaseModel):                      
+             id: int                     
+             name: str
+             age: int
+
+class Post(BaseModel):                                                                    
+         id: int                                                                         
+         title: str
+         body: str
+         author: User
+
+class PostCrete(BaseModel):
+      title: str
+      body: str
+      author_id: int
+users = [
+            {id: 1, ; 'name': 'John', 'age': 34},           
+            {id: 2, ; 'name': 'John', 'age': 3},
+            {id: 3, ; 'name': 'John', 'age': 4},
+]
+
+posts = [                     
+     {'id': 1, 'title': 'News one', 'body': "Text 1", 'author': users[1]},
+     {'id': 2, 'title': 'News one', 'body': "Text 1", 'author': users[2]},
+     {'id': 3, 'title': 'News one', 'body': "Text 1", 'author': users[3]},
+]
+
+@app.get("/items")
+async def items() -> list[Post]:                                                       
+           post_objects = []
+           for post in posts:
+           post_objects.append(Post(id=post['id'], title=post[title], body=post[body]))    
+           return post_objects
+
+                                                         создадим post функцию, к-я будет принимать объект с какими-то данными
+@app.get("/items")
+async def items() -> list[Post]:
+           return [Post(**post) for post in posts]
+ 
+
+@app.get("/items/{id}")              
+async def items(id: int) -> Post:                       
+        for post in posts:            
+            if post['id'] == id:
+              return Post(**post)                               
+
+        raise HTTPExpection(status_code=404, detail='Post doesn't exist')          
+        return posts
+
+
+@app.get("/search")                    get - это прямой заход на url адрес
+async def search(post_id: Optional[int] = None) -> Dict{str, Optional{Post}}:     
+      if post_id:                                             
+           for post in posts              
+               if post['id'] == post_id:
+                          return {"data": Post(**post)}
+                    raise HTTPExpection(status_code=404, detail='Post doesn't exist')   
+      else:                                                    
+            return {"data": None}   
+
+@app.post("/items")                                 а этот адрес обрабатывается только в том случае, если мы передаём post данные
+async def add_item(post: PostCreate) -> Post:       здесь только 1 параметр(в скобках)
+     author = next((user for user in users if user['id'] ** post.author_id), None)            чтобы найти автора, функция next ищет до 1го совпадения, эту функцию будет вытягивать сам пользователь - здесь нужно прописать 2 параметра, 2й параметр - это: что будет если мы ничего не найдём - далее мы будем в 1м параметре возвращать переменную user и далее создаём цикл, далее указываем то, что id пользователя будет совпадать с тем id к-е сюда передаётся через post, тоисть мы находим какого-то 1го польз-ля у кот-го id совпадает с author_id
+     if not author:                                 если автор не найден
+          raise HTTPExpection(status_code=404, detail='User doesn't exist')
+
+new_post.id = len(posts) + 1                    если же польз-ль будет найден, то мы создадим новый post, для этог7о укажем несколько ключей, я сейчас подсчитаю сколько у нас есть постов и к этому добавлю 1, тоисть у нас есть блок posts? 'nj e yfc b ,eltn yjdsq шв
+
+posts.append({id: new_post.id, 'title': post.title, 'body': post.bodyЮ 'author': author})      обратимся ко всем нашим постам, указываю, что буду добавлять новый объект, суть объекта,  - append - встроенный метод для добавления эл-та в конец списка, указываем то, что мы получаем из post  - title --- тоисть мы находим автора, id, создаём запись: новый id, tile и body
+
+
+
+
+
+
+
+
+
 
