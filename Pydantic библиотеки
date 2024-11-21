@@ -16,11 +16,18 @@ class Post(BaseModel):                                                          
          id: int                                                                           общая структура будет состоять из ключей для каждого поста(ниже)
          title: str
          body: str
+         author: User
+
+users = [
+            {id: 1, ; 'name': 'John', 'age': 34},               новая переменная: у каждого пользователя есть -
+            {id: 2, ; 'name': 'John', 'age': 3},
+            {id: 3, ; 'name': 'John', 'age': 4},
+]
 
 posts = [                     
-     {'id': 1, 'title': 'News one', 'body': "Text 1"},
-     {'id': 2, 'title': 'News one', 'body': "Text 1"},
-     {'id': 3, 'title': 'News one', 'body': "Text 1"},
+     {'id': 1, 'title': 'News one', 'body': "Text 1", 'author': users[1]},
+     {'id': 2, 'title': 'News one', 'body': "Text 1", 'author': users[2]},
+     {'id': 3, 'title': 'News one', 'body': "Text 1", 'author': users[3]},
 ]
 
 @app.get("/items")
