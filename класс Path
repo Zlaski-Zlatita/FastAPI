@@ -1,0 +1,16 @@
+from pathlib import Path 
+
+# list subdirectories and files inside a directory 
+path = Path("/Users/pankaj/temp") 
+
+subdirs = [] 
+files = [] 
+
+for x in path.iterdir(): # iterate over the files in the path 
+             if x.is_dir(): # condition to check if the file is a directory 
+                  subdirs.append(x) 
+              else: 
+                  files.append(x)
+
+print(subdirs) 
+print(files)
